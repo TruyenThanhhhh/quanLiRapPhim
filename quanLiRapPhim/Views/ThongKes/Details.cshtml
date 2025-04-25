@@ -1,0 +1,42 @@
+﻿@model quanLiRapPhim.Models.ThongKe
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ThongKe</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayTK)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NgayTK)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ThangTK)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ThangTK)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.QuyTK)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QuyTK)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DoanhThu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DoanhThu)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IDThongKe">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

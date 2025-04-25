@@ -1,0 +1,69 @@
+﻿@model quanLiRapPhim.Models.DonHang
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DonHang</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaGhe)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaGhe)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GiaVe)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GiaVe)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayDat)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NgayDat)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PhongChieu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PhongChieu.PhongID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.XuatChieu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.XuatChieu.ID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Phim)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Phim.DaoDien)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ThongKe)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ThongKe.IDThongKe)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NhanVien)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NhanVien.Username)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MaVe" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

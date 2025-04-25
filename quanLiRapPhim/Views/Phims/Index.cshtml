@@ -1,0 +1,59 @@
+﻿@model IEnumerable<quanLiRapPhim.Models.Phim>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenPhim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GioiHanDoTuoi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DaoDien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TheLoai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuocGia)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenPhim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiHanDoTuoi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaoDien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheLoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuocGia)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PhimID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PhimID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PhimID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
