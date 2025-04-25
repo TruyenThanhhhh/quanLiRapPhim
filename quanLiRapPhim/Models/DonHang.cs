@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace quanLiRapPhim.Models
 {
@@ -31,7 +32,7 @@ namespace quanLiRapPhim.Models
         [Required]
         public int IDNhanVien { get; set; }
 
-        // Navigation
+        // Navigation properties
         [ForeignKey("PhongChieuId")]
         public virtual PhongChieu PhongChieu { get; set; }
 
@@ -47,6 +48,4 @@ namespace quanLiRapPhim.Models
         [ForeignKey("IDNhanVien")]
         public virtual NhanVien NhanVien { get; set; }
     }
-
-
 }

@@ -1,62 +1,94 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using quanLiRapPhim.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using quanLiRapPhim.Models;
 
 namespace quanLiRapPhim.Data
 {
     public class quanLiRapPhimContext : DbContext
     {
-        public quanLiRapPhimContext (DbContextOptions<quanLiRapPhimContext> options)
+        public quanLiRapPhimContext(DbContextOptions<quanLiRapPhimContext> options)
             : base(options)
         {
         }
 
-        public DbSet<quanLiRapPhim.Models.DonHang> DonHang { get; set; } = default!;
-        public DbSet<quanLiRapPhim.Models.NhanVien> NhanVien { get; set; } = default!;
-        public DbSet<quanLiRapPhim.Models.Phim> Phim { get; set; } = default!;
-        public DbSet<quanLiRapPhim.Models.PhongChieu> PhongChieu { get; set; } = default!;
-        public DbSet<quanLiRapPhim.Models.QuanLy> QuanLy { get; set; } = default!;
-        public DbSet<quanLiRapPhim.Models.TaiKhoan> TaiKhoan { get; set; } = default!;
-        public DbSet<quanLiRapPhim.Models.ThongKe> ThongKe { get; set; } = default!;
-        public DbSet<quanLiRapPhim.Models.XuatChieu> XuatChieu { get; set; } = default!;
+        public DbSet<DonHang> DonHang { get; set; } = default!;
+        public DbSet<NhanVien> NhanVien { get; set; } = default!;
+        public DbSet<Phim> Phim { get; set; } = default!;
+        public DbSet<PhongChieu> PhongChieu { get; set; } = default!;
+        public DbSet<QuanLy> QuanLy { get; set; } = default!;
+        public DbSet<TaiKhoan> TaiKhoan { get; set; } = default!;
+        public DbSet<ThongKe> ThongKe { get; set; } = default!;
+        public DbSet<XuatChieu> XuatChieu { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Ràng buộc khóa ngoại với XuatChieuId trong bảng DonHang
+            // Disable cascade delete for ALL foreign key relationships in the database
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes()
+                .SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.NoAction;
+            }
+
+            // Now explicitly define the relationships for clarity (even though cascade delete is already disabled)
+
+            // XuatChieu -> PhongChieu
+            modelBuilder.Entity<XuatChieu>()
+                .HasOne(x => x.PhongChieu)
+                .WithMany(p => p.XuatChieus)
+                .HasForeignKey(x => x.PhongID)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // DonHang -> XuatChieu
             modelBuilder.Entity<DonHang>()
                 .HasOne(d => d.XuatChieu)
-                .WithMany()  // Tùy vào mối quan hệ bạn muốn giữa DonHang và XuatChieu
+                .WithMany(x => x.DonHangs)
                 .HasForeignKey(d => d.XuatChieuId)
-                .OnDelete(DeleteBehavior.NoAction);  // Tránh hành động cascade delete
+                .OnDelete(DeleteBehavior.NoAction);
 
+            // DonHang -> PhongChieu
             modelBuilder.Entity<DonHang>()
                 .HasOne(d => d.PhongChieu)
                 .WithMany(p => p.DonHangs)
                 .HasForeignKey(d => d.PhongChieuId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
+            // DonHang -> Phim
             modelBuilder.Entity<DonHang>()
                 .HasOne(d => d.Phim)
                 .WithMany()
                 .HasForeignKey(d => d.PhimId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
+            // DonHang -> ThongKe
             modelBuilder.Entity<DonHang>()
                 .HasOne(d => d.ThongKe)
                 .WithMany()
                 .HasForeignKey(d => d.IDThongKe)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
+            // DonHang -> NhanVien
             modelBuilder.Entity<DonHang>()
                 .HasOne(d => d.NhanVien)
                 .WithMany()
                 .HasForeignKey(d => d.IDNhanVien)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // NhanVien -> TaiKhoan
+            modelBuilder.Entity<NhanVien>()
+                .HasOne(nv => nv.TaiKhoan)
+                .WithMany()
+                .HasForeignKey(nv => nv.Username)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // QuanLy -> TaiKhoan
+            modelBuilder.Entity<QuanLy>()
+                .HasOne(ql => ql.TaiKhoan)
+                .WithMany()
+                .HasForeignKey(ql => ql.Username)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

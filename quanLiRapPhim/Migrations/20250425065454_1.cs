@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace quanLiRapPhim.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class _1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -92,8 +92,7 @@ namespace quanLiRapPhim.Migrations
                         name: "FK_XuatChieu_PhongChieu_PhongID",
                         column: x => x.PhongID,
                         principalTable: "PhongChieu",
-                        principalColumn: "PhongID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "PhongID");
                 });
 
             migrationBuilder.CreateTable(
@@ -111,8 +110,7 @@ namespace quanLiRapPhim.Migrations
                         name: "FK_NhanVien_TaiKhoan_Username",
                         column: x => x.Username,
                         principalTable: "TaiKhoan",
-                        principalColumn: "Username",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Username");
                 });
 
             migrationBuilder.CreateTable(
@@ -130,8 +128,7 @@ namespace quanLiRapPhim.Migrations
                         name: "FK_QuanLy_TaiKhoan_Username",
                         column: x => x.Username,
                         principalTable: "TaiKhoan",
-                        principalColumn: "Username",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Username");
                 });
 
             migrationBuilder.CreateTable(
@@ -156,20 +153,17 @@ namespace quanLiRapPhim.Migrations
                         name: "FK_DonHang_NhanVien_IDNhanVien",
                         column: x => x.IDNhanVien,
                         principalTable: "NhanVien",
-                        principalColumn: "IDNhanVien",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "IDNhanVien");
                     table.ForeignKey(
                         name: "FK_DonHang_Phim_PhimId",
                         column: x => x.PhimId,
                         principalTable: "Phim",
-                        principalColumn: "PhimID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "PhimID");
                     table.ForeignKey(
                         name: "FK_DonHang_PhongChieu_PhongChieuId",
                         column: x => x.PhongChieuId,
                         principalTable: "PhongChieu",
-                        principalColumn: "PhongID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "PhongID");
                     table.ForeignKey(
                         name: "FK_DonHang_ThongKe_IDThongKe",
                         column: x => x.IDThongKe,
@@ -179,8 +173,7 @@ namespace quanLiRapPhim.Migrations
                         name: "FK_DonHang_XuatChieu_XuatChieuId",
                         column: x => x.XuatChieuId,
                         principalTable: "XuatChieu",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateIndex(

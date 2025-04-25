@@ -12,8 +12,8 @@ using quanLiRapPhim.Data;
 namespace quanLiRapPhim.Migrations
 {
     [DbContext(typeof(quanLiRapPhimContext))]
-    [Migration("20250425063426_InitialCreate1")]
-    partial class InitialCreate1
+    [Migration("20250425065454_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -264,30 +264,30 @@ namespace quanLiRapPhim.Migrations
                     b.HasOne("quanLiRapPhim.Models.NhanVien", "NhanVien")
                         .WithMany()
                         .HasForeignKey("IDNhanVien")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("quanLiRapPhim.Models.ThongKe", "ThongKe")
                         .WithMany()
                         .HasForeignKey("IDThongKe")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("quanLiRapPhim.Models.Phim", "Phim")
                         .WithMany()
                         .HasForeignKey("PhimId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("quanLiRapPhim.Models.PhongChieu", "PhongChieu")
                         .WithMany("DonHangs")
                         .HasForeignKey("PhongChieuId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("quanLiRapPhim.Models.XuatChieu", "XuatChieu")
                         .WithMany("DonHangs")
                         .HasForeignKey("XuatChieuId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("NhanVien");
@@ -306,7 +306,7 @@ namespace quanLiRapPhim.Migrations
                     b.HasOne("quanLiRapPhim.Models.TaiKhoan", "TaiKhoan")
                         .WithMany()
                         .HasForeignKey("Username")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("TaiKhoan");
@@ -317,7 +317,7 @@ namespace quanLiRapPhim.Migrations
                     b.HasOne("quanLiRapPhim.Models.TaiKhoan", "TaiKhoan")
                         .WithMany()
                         .HasForeignKey("Username")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("TaiKhoan");
@@ -328,7 +328,7 @@ namespace quanLiRapPhim.Migrations
                     b.HasOne("quanLiRapPhim.Models.PhongChieu", "PhongChieu")
                         .WithMany("XuatChieus")
                         .HasForeignKey("PhongID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("PhongChieu");
